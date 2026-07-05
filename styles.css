@@ -2720,6 +2720,25 @@ a {
   margin: 0 auto;
 }
 
+.activities {
+  background:
+    linear-gradient(180deg, #fff 0%, #fffaf4 48%, #fff 100%);
+}
+
+.activity-heading {
+  max-width: 920px;
+  margin-bottom: clamp(46px, 6vw, 78px);
+}
+
+.activity-heading h2 {
+  line-height: 1.18;
+}
+
+.activity-heading p {
+  max-width: 780px;
+  line-height: 1.9;
+}
+
 .trust-wall {
   max-width: 1180px;
   margin: 0 auto;
@@ -3010,7 +3029,8 @@ a {
 }
 
 .activity-slider {
-  min-height: 520px;
+  aspect-ratio: 4 / 3;
+  min-height: 540px;
 }
 
 .activity-track {
@@ -3037,17 +3057,23 @@ a {
 .activity-slide img {
   width: 100%;
   height: 100%;
-  min-height: 520px;
+  min-height: 100%;
   object-fit: cover;
+  transition: transform 900ms cubic-bezier(.2,.8,.2,1), filter 300ms ease;
+}
+
+.activity-slider:hover .activity-slide.is-active img {
+  filter: saturate(1.05) contrast(1.04);
+  transform: scale(1.035);
 }
 
 .activity-slider::after {
   position: absolute;
   inset: auto 0 0;
-  height: 46%;
+  height: 34%;
   pointer-events: none;
   content: "";
-  background: linear-gradient(180deg, transparent, rgba(20, 10, 8, 0.68));
+  background: linear-gradient(180deg, transparent, rgba(20, 10, 8, 0.54));
 }
 
 .activity-slider-caption {
@@ -3072,8 +3098,9 @@ a {
   max-width: 620px;
   margin-top: 8px;
   font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
-  font-size: clamp(26px, 3vw, 42px);
+  font-size: clamp(24px, 2.4vw, 34px);
   line-height: 1.12;
+  text-shadow: 0 14px 40px rgba(0,0,0,0.42);
 }
 
 .activity-dots {
@@ -3086,8 +3113,8 @@ a {
 }
 
 .activity-dots button {
-  width: 30px;
-  height: 4px;
+  width: 26px;
+  height: 3px;
   padding: 0;
   cursor: pointer;
   background: rgba(255,248,239,0.42);
@@ -3138,11 +3165,45 @@ a {
 .timeline article,
 .activity-copy article {
   position: relative;
-  padding: 26px 28px;
+  padding: 28px 30px;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 8px;
   box-shadow: 0 18px 44px rgba(85, 23, 18, 0.08);
+}
+
+.activity-copy {
+  grid-auto-rows: 1fr;
+}
+
+.activity-copy article {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 18px;
+  align-items: start;
+  min-height: 170px;
+  transition: transform 260ms var(--ease), box-shadow 260ms var(--ease), border-color 260ms var(--ease);
+}
+
+.activity-copy article:hover {
+  transform: translateY(-6px);
+  border-color: rgba(201, 151, 74, 0.36);
+  box-shadow:
+    0 26px 66px rgba(85, 23, 18, 0.14),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+.activity-copy i {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  background: #fff7e6;
+  border: 1px solid rgba(201, 151, 74, 0.28);
+  border-radius: 8px;
+  font-style: normal;
+  font-size: 22px;
+  box-shadow: 0 12px 26px rgba(85, 23, 18, 0.08);
 }
 
 .trust-proof article::before {
@@ -3193,6 +3254,141 @@ a {
 .activity-copy span {
   margin: 0;
   color: var(--muted);
+}
+
+.activity-copy span {
+  display: block;
+  line-height: 1.75;
+}
+
+.activity-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+  max-width: 980px;
+  margin: clamp(54px, 7vw, 86px) auto 0;
+}
+
+.activity-metrics article {
+  padding: 34px 24px;
+  text-align: center;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,248,238,0.94));
+  border: 1px solid rgba(201, 151, 74, 0.24);
+  border-radius: 8px;
+  box-shadow:
+    0 22px 60px rgba(85, 23, 18, 0.09),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+.activity-metrics strong {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 4px;
+  color: var(--burgundy);
+  font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  font-size: clamp(44px, 6vw, 72px);
+  line-height: 1;
+}
+
+.activity-metrics em {
+  color: var(--gold);
+  font-style: normal;
+  font-size: 0.58em;
+}
+
+.activity-metrics p {
+  max-width: 220px;
+  margin: 14px auto 0;
+  color: #4c4540;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.55;
+}
+
+.activity-belief {
+  max-width: 900px;
+  margin: clamp(60px, 8vw, 104px) auto 0;
+  padding: clamp(42px, 7vw, 76px) clamp(24px, 5vw, 58px);
+  text-align: center;
+  background: #fff;
+  border: 1px solid rgba(201, 151, 74, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 28px 84px rgba(85, 23, 18, 0.08);
+}
+
+.activity-belief p {
+  margin: 0;
+  color: #241b18;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 800;
+  line-height: 1.65;
+}
+
+.activity-belief p + p {
+  margin-top: 12px;
+}
+
+.activity-cta {
+  max-width: 980px;
+  margin: clamp(46px, 7vw, 76px) auto 0;
+  padding: clamp(34px, 5vw, 58px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: center;
+  color: #fff8ef;
+  background:
+    linear-gradient(135deg, #160f0d 0%, #7d1710 54%, #ad1f16 100%);
+  border-radius: 8px;
+  box-shadow: 0 30px 90px rgba(85, 23, 18, 0.22);
+}
+
+.activity-cta h3 {
+  margin: 0;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  font-size: clamp(32px, 4vw, 54px);
+  line-height: 1.22;
+}
+
+.activity-cta div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: flex-end;
+}
+
+.activity-cta a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160px;
+  min-height: 54px;
+  padding: 14px 22px;
+  color: #fff8ef;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 950;
+  text-decoration: none;
+  transition: transform 220ms var(--ease), box-shadow 220ms var(--ease), background 220ms var(--ease);
+}
+
+.activity-cta a.primary {
+  background: linear-gradient(135deg, var(--red), #d49a3e);
+  box-shadow: 0 18px 42px rgba(173, 31, 22, 0.32);
+}
+
+.activity-cta a.secondary {
+  color: #fff8ef;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.28);
+}
+
+.activity-cta a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.28);
 }
 
 .pathway-grid {
@@ -4344,6 +4540,23 @@ a {
     grid-template-columns: 1fr;
   }
 
+  .activity-grid {
+    align-items: stretch;
+  }
+
+  .activity-slider {
+    min-height: 460px;
+  }
+
+  .activity-metrics,
+  .activity-cta {
+    grid-template-columns: 1fr;
+  }
+
+  .activity-cta div {
+    justify-content: flex-start;
+  }
+
   .award-carousel {
     grid-template-columns: 1fr;
     min-height: auto;
@@ -4755,8 +4968,48 @@ a {
   .promise-grid,
   .program-map,
   .method-grid,
-  .teacher-profile-grid {
+  .teacher-profile-grid,
+  .activity-metrics {
     grid-template-columns: 1fr;
+  }
+
+  .activity-heading {
+    margin-bottom: 34px;
+  }
+
+  .activity-heading p {
+    line-height: 1.75;
+  }
+
+  .activity-slider {
+    min-height: 360px;
+    aspect-ratio: 4 / 5;
+  }
+
+  .activity-slider-caption {
+    bottom: 42px;
+  }
+
+  .activity-copy article {
+    min-height: auto;
+    padding: 24px 22px;
+  }
+
+  .activity-belief {
+    padding: 34px 22px;
+  }
+
+  .activity-cta {
+    padding: 30px 22px;
+  }
+
+  .activity-cta div {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .activity-cta a {
+    width: 100%;
   }
 
   .teacher-card figure {

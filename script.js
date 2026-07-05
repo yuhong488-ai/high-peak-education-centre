@@ -426,7 +426,7 @@ const startActivitySlider = () => {
   window.clearInterval(activityTimer);
   activityTimer = window.setInterval(() => {
     showActivitySlide(activeActivitySlide + 1);
-  }, 3600);
+  }, 4000);
 };
 
 if (activitySlider && activityDots && activitySlides.length) {
