@@ -118,6 +118,12 @@ const teacherFilterLabel = document.querySelector("[data-teacher-filter-label]")
 const teacherCount = document.querySelector("[data-teacher-count]");
 let lastTeacherTrigger = null;
 
+const syncModalLock = () => {
+  const hasOpenTeacherModal = Boolean(teacherModal?.classList.contains("open"));
+  const hasOpenLightbox = Boolean(document.querySelector("#posterLightbox")?.classList.contains("open"));
+  document.body.classList.toggle("modal-open", hasOpenTeacherModal || hasOpenLightbox);
+};
+
 const tagLabels = {
   all: "全部老师",
   primary: "小学补习",
@@ -189,7 +195,7 @@ const openTeacherModal = (teacher, trigger = null) => {
   teacherModalIg.textContent = `@${teacher.ig}`;
   teacherModal.classList.add("open");
   teacherModal.setAttribute("aria-hidden", "false");
-  document.body.classList.add("modal-open");
+  syncModalLock();
   teacherModalClose?.focus();
 };
 
@@ -197,7 +203,7 @@ const closeTeacherModal = () => {
   if (!teacherModal) return;
   teacherModal.classList.remove("open");
   teacherModal.setAttribute("aria-hidden", "true");
-  document.body.classList.remove("modal-open");
+  syncModalLock();
   lastTeacherTrigger?.focus?.();
   lastTeacherTrigger = null;
 };
@@ -306,7 +312,7 @@ const closeLightbox = () => {
   lightbox.setAttribute("aria-hidden", "true");
   lightboxImage.src = "";
   lightboxImage.alt = "";
-  document.body.classList.remove("modal-open");
+  syncModalLock();
 };
 
 document.addEventListener("click", (event) => {
@@ -317,7 +323,7 @@ document.addEventListener("click", (event) => {
   lightboxImage.alt = trigger.querySelector("img")?.alt || "图片预览";
   lightbox.classList.add("open");
   lightbox.setAttribute("aria-hidden", "false");
-  document.body.classList.add("modal-open");
+  syncModalLock();
   lightboxClose?.focus();
 });
 
@@ -332,6 +338,11 @@ document.addEventListener("keydown", (event) => {
 lightboxClose?.addEventListener("click", closeLightbox);
 lightbox?.addEventListener("click", (event) => {
   if (event.target === lightbox) closeLightbox();
+});
+
+window.addEventListener("pageshow", syncModalLock);
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) syncModalLock();
 });
 
 const awardCarousel = document.querySelector(".award-carousel");
