@@ -306,6 +306,7 @@ const closeLightbox = () => {
   lightbox.setAttribute("aria-hidden", "true");
   lightboxImage.src = "";
   lightboxImage.alt = "";
+  document.body.classList.remove("modal-open");
 };
 
 document.addEventListener("click", (event) => {
@@ -316,6 +317,16 @@ document.addEventListener("click", (event) => {
   lightboxImage.alt = trigger.querySelector("img")?.alt || "图片预览";
   lightbox.classList.add("open");
   lightbox.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+  lightboxClose?.focus();
+});
+
+document.addEventListener("keydown", (event) => {
+  const trigger = event.target.closest?.("[data-lightbox-src]");
+  if (!trigger || (event.key !== "Enter" && event.key !== " ")) return;
+
+  event.preventDefault();
+  trigger.click();
 });
 
 lightboxClose?.addEventListener("click", closeLightbox);

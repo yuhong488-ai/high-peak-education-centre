@@ -3271,7 +3271,7 @@ a {
 .promise-card {
   position: relative;
   display: grid;
-  grid-template-rows: 230px 1fr;
+  grid-template-rows: auto 1fr;
   min-height: 560px;
   overflow: hidden;
   color: #231815;
@@ -3305,9 +3305,12 @@ a {
 
 .promise-card figure {
   position: relative;
+  aspect-ratio: 3388 / 4219;
   margin: 0;
   overflow: hidden;
-  background: #160f0d;
+  cursor: zoom-in;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,246,232,0.92));
 }
 
 .promise-card figure::after {
@@ -3322,20 +3325,19 @@ a {
 .promise-card img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  display: block;
+  object-fit: contain;
   object-position: center;
-  transition: transform 600ms var(--ease);
+  transition: filter 260ms var(--ease);
 }
 
 .promise-card:hover img {
-  transform: scale(1.05);
+  filter: saturate(1.05) contrast(1.03);
 }
 
-.promise-card:nth-child(2) img,
-.promise-card:nth-child(4) img {
-  object-fit: contain;
-  padding: 14px;
-  background: #0b0b0b;
+.promise-card figure:focus-visible {
+  outline: 3px solid rgba(201, 151, 74, 0.82);
+  outline-offset: -8px;
 }
 
 .promise-body {
@@ -4618,7 +4620,7 @@ a {
   }
 
   .promise-card {
-    grid-template-rows: 260px auto;
+    grid-template-rows: auto auto;
     min-height: auto;
   }
 
